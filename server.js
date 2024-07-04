@@ -10,6 +10,8 @@ const connectDB = require('./config/db');
 dotenv.config(); // because it is root we don't need to specify the path but if this file outside the root with have to use path
 // synatx dotenv.config({ path: './config.env' });
 
+// routes Import
+const userRoutes = require('./routes/userRoutes');
 
 // mongoose connection
 connectDB();
@@ -20,12 +22,9 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+
 // Routes
-app.get("/", (req, res) => {
-    res.status(200).send({
-        "message": "Welcome to the API"
-    });
-})
+app.use('/api/v1/user', userRoutes);
 
 //PORT
 const PORT = process.env.PORT || 5000;
